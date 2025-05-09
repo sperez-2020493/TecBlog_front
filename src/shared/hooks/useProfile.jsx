@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
-import { getUserInfo, getProfilePicture } from '../../services/api';
+import { getUserInfo } from '../../services/api';
 
 export const useProfile = () => {
   const [profile, setProfile] = useState(null);

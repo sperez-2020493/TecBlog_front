@@ -70,3 +70,75 @@ body, html {
   font-weight: bold;
   color: #2B535C;
 }
+
+@media (max-width: 1024px) {
+  .profile-info h1 {
+    font-size: 1.6rem;
+  }
+
+  .profile-info p {
+    font-size: 0.95rem;
+  }
+
+  .profile-stats {
+    gap: 30px;
+  }
+
+  .profile-stat span {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-info h1 {
+    font-size: 1.4rem;
+  }
+
+  .profile-info p {
+    font-size: 0.9rem;
+  }
+
+  .profile-stats {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .profile-stat span {
+    font-size: 1.2rem;
+  }
+
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-info h1 {
+    font-size: 1.2rem;
+  }
+
+  .profile-info p {
+    font-size: 0.85rem;
+  }
+
+  .profile-stats {
+    gap: 15px;
+  }
+
+  .profile-stat span {
+    font-size: 1rem;
+  }
+
+  .profile-picture {
+    width: 90px;
+    height: 90px;
+  }
+
+  .profile-container {
+    padding: 10px;
+  }
+}

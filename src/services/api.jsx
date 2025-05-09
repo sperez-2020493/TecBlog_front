@@ -15,17 +15,3 @@ export const getUserInfo = async () => {
     }
 };
 
-export const getProfilePicture = async () => {
-    try {
-        const response = await axios.get('http://localhost:3001/profile-picture/Usuario-1746682644172.png', {
-            withCredentials: true, 
-            responseType: 'blob',  
-        });
-
-        const imageUrl = URL.createObjectURL(response.data);
-        return imageUrl;
-    } catch (e) {
-        console.error('Error al obtener la imagen de perfil:', e);
-        return { error: true, e };
-    }
-};
