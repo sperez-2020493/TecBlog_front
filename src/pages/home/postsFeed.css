@@ -1,0 +1,312 @@
+/* Contenedor principal */
+.feed-container {
+  max-width: 650px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Texto de carga */
+.loading-text {
+  text-align: center;
+  margin-top: 1rem;
+  color: #6b7280;
+}
+
+/* Contenedor de la tarjeta */
+.post-wrapper {
+  margin-bottom: 1.5rem;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Efecto de zoom */
+.post-wrapper:hover {
+  transform: scale(1.03);
+}
+
+/* Tarjeta principal */
+.post-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.2rem;
+  position: relative;
+  overflow: visible;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para el post */
+}
+
+.post-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 5px;
+  right: 5px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgb(0, 98, 255), rgb(255, 0, 200));
+  border-radius: 12px;
+  filter: blur(14px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Mostrar sombra al hacer hover */
+.post-wrapper:hover::before {
+  opacity: 1;
+}
+
+/* Animación de entrada */
+.animated {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Encabezado de la tarjeta */
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+/* Título */
+.post-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.3rem;
+}
+
+/* Descripción general */
+.post-description {
+  color: #374151; /* Color de texto más oscuro */
+  margin-bottom: 0.6rem;
+  font-size: 1rem; /* Aumentar tamaño de texto */
+  line-height: 1.8;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Permitir que el texto fluya normalmente */
+  word-wrap: break-word; /* Permite romper las palabras largas si es necesario */
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con opacidad para resaltar */
+  padding: 0.5rem; /* Padding para que el texto no quede tan pegado */
+  border-radius: 8px; /* Bordes redondeados para suavizar */
+  max-height: 7rem; /* Ajuste el límite a una altura razonable (aproximadamente 3 líneas de texto) */
+  transition: max-height 0.3s ease, padding 0.3s ease; /* Agregado para suavizar la transición */
+}
+
+/* Cuando se muestra la descripción completa */
+.post-description.show-full {
+  white-space: normal; /* El texto completo puede ocupar múltiples líneas sin romperse */
+  max-height: none; /* Permite que se expanda completamente */
+  padding: 0.5rem; /* Ajuste adicional para no romper el diseño */
+}
+
+.post-description p {
+  margin-bottom: 0.8rem;
+}
+
+/* Imagen */
+.post-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 0.7rem;
+  object-fit: cover;
+  max-height: 350px;
+}
+
+/* Sección de likes */
+.post-likes {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #9ca3af;
+  margin-top: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  user-select: none;
+}
+
+.post-likes:hover {
+  background-color: #fef2f2;
+  transform: scale(1.03);
+}
+
+/* Ícono de like */
+.like-icon {
+  font-size: 1.3rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Animación al dar like */
+.like-icon.animate {
+  animation: pop 0.3s ease;
+}
+
+.liked .like-icon {
+  color: #ef4444;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Botones de interacción */
+.toggle-button {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 0.95rem; /* Aumentar ligeramente el tamaño */
+  padding: 0.3rem 0;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+.toggle-button:hover {
+  text-decoration: underline;
+}
+
+/* Comentarios */
+.post-comments {
+  margin-top: 1rem;
+}
+
+/* Comentario individual */
+.comment-bubble {
+  display: flex;
+  align-items: flex-start;
+  background-color: #f3f4f6;
+  padding: 0.75rem;
+  border-radius: 12px;
+  margin-bottom: 0.6rem;
+  position: relative;
+  gap: 0.6rem;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+/* Avatar del comentario */
+.comment-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Contenido del comentario */
+.comment-text {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  max-width: 100%;
+  flex: 1;
+}
+
+.comment-author {
+  font-weight: 600;
+  color: #111827;
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.85rem;
+}
+
+.comment-text p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.video-selector {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.video-button {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.video-button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.comment-form {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.comment-form input,
+.comment-form textarea {
+  font-size: 1rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+  outline: none;
+  border-color: #0077cc;
+  box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.2);
+}
+
+.comment-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.comment-form button {
+  align-self: flex-end;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.25rem;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+  background-color: #005fa3;
+}

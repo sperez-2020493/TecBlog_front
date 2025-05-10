@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useProfile } from '../../shared/hooks/useProfile';
-import '../../pages/home/homePage.css';
+import '../../pages/Home/homePage.css'; 
 
 export const NavbarHome = () => {
-  const { profile, profilePicture, loading, getProfile } = useProfile();
+  const { profile, loading, getProfile } = useProfile();
 
   useEffect(() => {
     getProfile();
@@ -18,13 +18,13 @@ export const NavbarHome = () => {
   }
 
   return (
-    <div className="profile-container">
+    <div className="profile-container animate-fade-slide">
       <div
         className="profile-banner"
-        style={{ backgroundImage: 'url("../../../public/fox_logo.png")' }}
+        style={{ backgroundImage: 'url("/Banner1.gif")' }}
       >
         <img
-          src={profilePicture}
+          src={`/${profile.profilePicture}`}
           alt="Foto de perfil"
           className="profile-picture"
         />

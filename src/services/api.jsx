@@ -15,3 +15,33 @@ export const getUserInfo = async () => {
     }
 };
 
+export const getPostsWithComments = async () => {
+    try {
+        const response = await apiClient.get('/post/list');
+        return response.data;
+    } catch (e) {
+        console.error('Error al obtener los posts con comentarios:', e);
+        return { error: true, e };
+    }
+};
+
+export const likePostById = async (postId) => {
+    try {
+        const response = await apiClient.post(`/post/like/${postId}`);
+        console.log(response); 
+        return response.data;
+    } catch (e) {
+        console.error(`Error al dar like al post con ID ${postId}:`, e);
+        return { error: true, e };
+    }
+};
+
+export const createComment = async (commentData) => {
+    try {
+        const response = await apiClient.post('/comment/create', commentData);
+        return response.data;
+    } catch (e) {
+        console.error('Error al crear el comentario:', e);
+        return { error: true, e };
+    }
+};

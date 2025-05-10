@@ -1,10 +1,9 @@
 import { useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
-import { getUserInfo } from '../../services/api';
+import { getUserInfo, likePostById } from '../../services/api';
 
 export const useProfile = () => {
   const [profile, setProfile] = useState(null);
-  const [profilePicture, setProfilePicture] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const getProfile = useCallback(async () => {
@@ -14,9 +13,6 @@ export const useProfile = () => {
 
       if (response?.data && response?.data?.uid) {
         setProfile(response.data);
-
-        const pictureUrl = await getProfilePicture();
-        setProfilePicture(pictureUrl);
       } else {
         toast.error("Error al obtener el perfil del usuario");
         console.error("Respuesta inválida:", response);
@@ -29,10 +25,22 @@ export const useProfile = () => {
     }
   }, []);
 
+  const likePost = useCallback(async (postId) => {
+    try {
+      const response = await likePostById(postId);
+      toast.success("¡Te gustó esta publicación!");
+      return response;
+    } catch (error) {
+      toast.error("Error al dar like a la publicación");
+      console.error("Error en likePost:", error);
+      return { error: true, error };
+    }
+  }, []);
+
   return {
     profile,
-    profilePicture,
     loading,
     getProfile,
+    likePost, 
   };
 };
