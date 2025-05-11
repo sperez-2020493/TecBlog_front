@@ -217,19 +217,27 @@ const PostCard = ({ post, handleCreateComment, commentLoading }) => {
     return match ? match[1] : null;
   };
 
-  const linkifyText = (text) => {
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    return text.split(urlRegex).map((part, index) => {
-      if (urlRegex.test(part)) {
-        return (
-          <a key={index} href={part} target="_blank" rel="noopener noreferrer" style={{ color: '#0077cc' }}>
-            {part}
-          </a>
-        );
-      }
-      return part;
-    });
-  };
+const linkifyText = (text) => {
+  // Este regex detecta URLs completas, incluyendo parámetros como ? y =
+  const urlRegex = /(https?:\/\/[^\s]+)/gi;
+
+  return text.split(urlRegex).map((part, index) => {
+    if (urlRegex.test(part)) {
+      return (
+        <a
+          key={index}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: '#0077cc' }}
+        >
+          {part}
+        </a>
+      );
+    }
+    return part;
+  });
+};
 
   const videoUrl = extractVideoUrl(post.description);
 
@@ -245,9 +253,9 @@ const PostCard = ({ post, handleCreateComment, commentLoading }) => {
       <h2 className="post-title">{post.title}</h2>
 
       <div className={`post-description ${showFullDesc ? 'show-full' : ''}`}>
-        <p className="post-text">
+        <div className="post-text">
           {linkifyText(showFullDesc ? post.description : `${post.description.slice(0, 120)}...`)}
-        </p>
+        </div>
         {post.description.length > 120 && (
           <button onClick={toggleDesc} className="toggle-button">
             {showFullDesc ? 'Ver menos' : 'Leer más'}
