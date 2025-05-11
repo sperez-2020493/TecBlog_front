@@ -36,7 +36,7 @@ El objetivo de este proyecto es que se asimile a una red social, se baso todo el
 
 ## ⚙️ Tecnologías
 
-- React
+- React + vite
 - Axios
 - React Router
 
@@ -45,13 +45,13 @@ El objetivo de este proyecto es que se asimile a una red social, se baso todo el
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/tecblog-frontend.git
+git clone https://github.com/sperez-2020493/TecBlog_front.git
 ```
 
-2. Abre una terminal en la carpeta del proyecto:
+2. Abre una terminal en la carpeta del proyecto y instala las dependencias:
 
 ```bash
-npm install
+npm i
 ```
 
 3. Ejecuta el proyecto:
@@ -64,9 +64,6 @@ npm run dev
 
 ## 🧑🏽 Desarrollador del proyecto
 
-```
 **Desarrollador:** Samuel Alexander Perez Cap - 2020493 - IN6BM
-
-```
 
 ---
