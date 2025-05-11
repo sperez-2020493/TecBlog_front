@@ -33,7 +33,7 @@ export const useProfile = () => {
     } catch (error) {
       toast.error("Error al dar like a la publicación");
       console.error("Error en likePost:", error);
-      return { error: true, error };
+      return { hasError: true, error };
     }
   }, []);
 

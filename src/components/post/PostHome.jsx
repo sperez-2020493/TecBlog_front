@@ -7,23 +7,145 @@ import '../../pages/Home/postsFeed.css';
 export const PostsFeed = () => {
   const { posts, loading, fetchPosts, handleCreateComment, commentLoading } = usePostsWithComments();
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchAuthor, setSearchAuthor] = useState('');
+  const [searchCourse, setSearchCourse] = useState('');
+  const [dateFilter, setDateFilter] = useState('recent');
+  const [exactDate, setExactDate] = useState('');
+
+  const [showAuthorSuggestions, setShowAuthorSuggestions] = useState(false);
+  const [showCourseSuggestions, setShowCourseSuggestions] = useState(false);
+
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
+
+  const authors = [...new Set(posts.map(post => `${post.createdBy.name} ${post.createdBy.surname}`))];
+  const courses = [...new Set(posts.map(post => post.course))];
+
+  const filteredPosts = posts
+    .filter((post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      `${post.createdBy.name} ${post.createdBy.surname}`.toLowerCase().includes(searchAuthor.toLowerCase()) &&
+      post.course.toLowerCase().includes(searchCourse.toLowerCase()) &&
+      (dateFilter !== 'exact' || new Date(post.date).toLocaleDateString('sv-SE') === exactDate)
+    )
+    .sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      if (dateFilter === 'recent') return dateB - dateA;
+      if (dateFilter === 'oldest') return dateA - dateB;
+      return 0;
+    });
+
+  const filteredAuthorSuggestions = authors.filter(author =>
+    author.toLowerCase().includes(searchAuthor.toLowerCase()) &&
+    author.toLowerCase() !== searchAuthor.toLowerCase()
+  );
+
+  const filteredCourseSuggestions = courses.filter(course =>
+    course.toLowerCase().includes(searchCourse.toLowerCase()) &&
+    course.toLowerCase() !== searchCourse.toLowerCase()
+  );
 
   if (loading) return <p className="loading-text">Cargando publicaciones...</p>;
 
   return (
     <div className="feed-container">
-      {posts.map((post) => (
+      <div className="search-bar">
+
+        <div className="search-field">
+          <input
+            type="text"
+            placeholder="Buscar por título"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
+        <div className="autocomplete">
+          <input
+            type="text"
+            placeholder="Buscar por autor"
+            value={searchAuthor}
+            onChange={(e) => {
+              setSearchAuthor(e.target.value);
+              setShowAuthorSuggestions(true);
+            }}
+            onBlur={() => setTimeout(() => setShowAuthorSuggestions(false), 100)}
+            onFocus={() => searchAuthor && setShowAuthorSuggestions(true)}
+          />
+          {showAuthorSuggestions && filteredAuthorSuggestions.length > 0 && (
+            <ul className="suggestions-list">
+              {filteredAuthorSuggestions.map((author, i) => (
+                <li key={i} onClick={() => {
+                  setSearchAuthor(author);
+                  setShowAuthorSuggestions(false);
+                }}>
+                  {author}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className="autocomplete">
+          <input
+            type="text"
+            placeholder="Buscar por curso"
+            value={searchCourse}
+            onChange={(e) => {
+              setSearchCourse(e.target.value);
+              setShowCourseSuggestions(true);
+            }}
+            onBlur={() => setTimeout(() => setShowCourseSuggestions(false), 100)}
+            onFocus={() => searchCourse && setShowCourseSuggestions(true)}
+          />
+          {showCourseSuggestions && filteredCourseSuggestions.length > 0 && (
+            <ul className="suggestions-list">
+              {filteredCourseSuggestions.map((course, i) => (
+                <li key={i} onClick={() => {
+                  setSearchCourse(course);
+                  setShowCourseSuggestions(false);
+                }}>
+                  {course}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className="search-field">
+          <select value={dateFilter} onChange={(e) => setDateFilter(e.target.value)}>
+            <option value="recent">Más reciente</option>
+            <option value="oldest">Más antigua</option>
+            <option value="exact">Fecha exacta</option>
+          </select>
+        </div>
+
+        {dateFilter === 'exact' && (
+          <div className="search-field">
+            <input
+              type="date"
+              value={exactDate}
+              onChange={(e) => setExactDate(e.target.value)}
+            />
+          </div>
+        )}
+      </div>
+
+      {filteredPosts.map((post) => (
         <div key={post._id} className="post-wrapper">
-          <PostCard post={post} handleCreateComment={handleCreateComment} commentLoading={commentLoading} />
+          <PostCard
+            post={post}
+            handleCreateComment={handleCreateComment}
+            commentLoading={commentLoading}
+          />
         </div>
       ))}
     </div>
   );
 };
-
 const PostCard = ({ post, handleCreateComment, commentLoading }) => {
   const [showFullDesc, setShowFullDesc] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -233,4 +355,3 @@ const PostCard = ({ post, handleCreateComment, commentLoading }) => {
   );
 };
 
-export default PostsFeed;
