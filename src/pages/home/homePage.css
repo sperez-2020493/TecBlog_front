@@ -1,0 +1,211 @@
+body, html {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8;
+  height: 100%;
+}
+
+.profile-container {
+  width: 100%;
+  max-width: 80%;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgb(221, 223, 243);
+  overflow: hidden;
+}
+
+.profile-banner {
+  width: 100%;
+  height: 550px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.profile-picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  position: absolute;
+  bottom: -60px;
+  left: 30px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.profile-info {
+  padding: 80px 30px 30px 30px;
+  text-align: left;
+  max-width: 60%;
+  margin-left: 150px;
+}
+
+.profile-info h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #2B535C;
+}
+
+.profile-info p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 60px;
+  margin-top: 20px;
+  justify-content: flex-start;
+}
+
+.profile-stat {
+  font-size: 1.2rem;
+  color: #333;
+  text-align: left;
+}
+
+.profile-stat span {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2B535C;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-slide {
+  animation: fadeSlideIn 0.8s ease-out both;
+}
+
+@media (min-width: 1200px) {
+  .profile-container {
+    max-width: 80%;
+  }
+  .profile-banner {
+    height: 500px;
+  }
+  .profile-picture {
+    width: 140px;
+    height: 140px;
+    left: 50px;
+  }
+  .profile-info {
+    max-width: 100%;
+    margin-left: 25px;
+    margin-top: 70px;
+    text-align: left;
+  }
+  .profile-info h1 {
+    font-size: 2.2rem;
+  }
+  .profile-info p {
+    font-size: 1.2rem;
+  }
+  .profile-stats {
+    gap: 60px;
+    justify-content: flex-start;
+  }
+  .profile-stat span {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .profile-banner {
+    height: 350px;
+  }
+  .profile-info {
+    padding: 80px 20px 30px 20px;
+    text-align: center;
+    margin-left: 0;
+    max-width: 100%;
+  }
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .profile-info h1 {
+    font-size: 1.6rem;
+  }
+  .profile-info p {
+    font-size: 1rem;
+  }
+  .profile-stats {
+    gap: 30px;
+  }
+  .profile-stat span {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-banner {
+    height: 300px;
+  }
+  .profile-info {
+    padding: 80px 20px 30px 20px;
+    text-align: center;
+    margin-left: 0;
+  }
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .profile-info h1 {
+    font-size: 1.4rem;
+  }
+  .profile-info p {
+    font-size: 0.95rem;
+  }
+  .profile-stats {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .profile-stat span {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-banner {
+    height: 250px;
+  }
+  .profile-picture {
+    width: 90px;
+    height: 90px;
+  }
+  .profile-info h1 {
+    font-size: 1.2rem;
+  }
+  .profile-info p {
+    font-size: 0.85rem;
+  }
+  .profile-stats {
+    gap: 15px;
+  }
+  .profile-stat span {
+    font-size: 1rem;
+  }
+  .profile-container {
+    padding: 10px;
+  }
+}
