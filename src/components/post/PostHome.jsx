@@ -218,7 +218,6 @@ const PostCard = ({ post, handleCreateComment, commentLoading }) => {
   };
 
 const linkifyText = (text) => {
-  // Este regex detecta URLs completas, incluyendo parámetros como ? y =
   const urlRegex = /(https?:\/\/[^\s]+)/gi;
 
   return text.split(urlRegex).map((part, index) => {

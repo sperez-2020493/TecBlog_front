@@ -86,7 +86,7 @@
 }
 
 .navbar-link:hover {
-  color: #fff;
+  color: #ff9100;
 }
 
 .navbar-link:hover::after {

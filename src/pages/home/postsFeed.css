@@ -44,8 +44,9 @@
   filter: blur(14px);
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
+
 }
 
 .post-wrapper:hover::before {
@@ -310,6 +311,7 @@
   transition: all 0.3s ease;
   margin-bottom: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1; 
 }
 
 .post-title {
@@ -324,7 +326,7 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   margin-bottom: 2rem;
-  padding: 1rem;
+  padding: 2rem;
   background-color: #f9f9f9;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -370,6 +372,10 @@
   pointer-events: none;
 }
 
+.autocomplete {
+  position: relative;
+}
+
 .suggestions-list {
   position: absolute;
   top: 100%;
@@ -382,7 +388,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   max-height: 180px;
   overflow-y: auto;
-  z-index: 50;
+  z-index: +99; 
   list-style: none;
   padding: 0;
 }
